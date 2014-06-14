@@ -1,0 +1,42 @@
+// TODO: Connection properties
+// TODO: Create db
+// TODO: Git
+// TODO: sql folder.
+// TODO: readme.md
+// TODO: Document
+// TODO: Publish minor planet reader to git hub maven repo
+// TODO: Update this to use github maven version of reader
+// TODO: publish this.
+// TODO: Sort out logging
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile files('lib/MinorPlanetCenterReader-0.0.1.jar')
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+        resources {
+            srcDir 'test'
+        }
+    }
+}
