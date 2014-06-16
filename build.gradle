@@ -1,16 +1,14 @@
-// TODO: Connection properties
-// TODO: Create db
-// TODO: Git
-// TODO: sql folder.
 // TODO: readme.md
 // TODO: Document
 // TODO: Publish minor planet reader to git hub maven repo
 // TODO: Update this to use github maven version of reader
 // TODO: publish this.
-// TODO: Sort out logging
 
 apply plugin: 'java'
+apply plugin:'application'
 
+
+mainClassName = "com.wselwood.minorplanetloader.Main"
 sourceCompatibility = 1.7
 version = '1.0'
 
@@ -39,4 +37,14 @@ sourceSets {
             srcDir 'test'
         }
     }
+}
+
+jar {
+    manifest {
+        attributes("Implementation-Title": "MinorPlanetCenterLoader", "Implementation-Version": version, "Main-Class": "com.wselwood.minorplanetloader.Main")
+    }
+}
+
+applicationDistribution.from(project.projectDir){
+    include("connection.properties")
 }

@@ -7,7 +7,12 @@ import com.wselwood.mpcreader.MinorPlanetReaderBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.sql.*;
+import java.util.Properties;
 
 /**
  *
@@ -19,6 +24,15 @@ public class Main {
         Connection connection = null;
         MinorPlanetReader reader = null;
         PreparedStatement insert = null;
+        Properties props = new Properties();
+        try {
+            props.load(Files.newInputStream(Paths.get("./connection.properties"), StandardOpenOption.READ));
+        }
+        catch(IOException e) {
+            System.out.println("could not load connection.properties");
+            e.printStackTrace();
+            return;
+        }
 
         if (args.length < 1) {
             System.out.println("Please pass a list of file names as arguments");
@@ -26,14 +40,15 @@ public class Main {
         }
 
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(props.getProperty("driver"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return;
         }
 
         try {
 
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/minor_planets", "loader", "");
+            connection = DriverManager.getConnection(props.getProperty("url"), props.getProperty("username"), props.getProperty("password"));
             insert = createInsert(connection);
 
             // loop over all the arguments and load each one.
