@@ -55,4 +55,4 @@ Finally you will need to port the sql table creation command from the sql/postgr
 
 ## Notes on usage ##
 
-The table creation does not put any indexes on to the table. I recomend not creating any needed indexes until after all the data base been loaded into the database.
+The table creation does not put any indexes on to the table. I recomend not creating any needed indexes until after all the data has been loaded into the database.
