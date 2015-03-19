@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile files('lib/MinorPlanetCenterReader-0.0.1.jar')
+    compile 'com.github.wselwood:mpc-reader:0.1.0'
     compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 }
 
